@@ -1,0 +1,158 @@
+---
+sidebar_position: 3.2
+---
+
+# 事件处理
+
+## 注册事件处理器
+
+`Mirai` 对象的 `on` 方法用于注册事件处理器。
+
+```python
+from mirai import GroupMessage
+
+# 接收群消息
+@bot.on(GroupMessage)
+async def handle_group_message(event: GroupMessage):
+    print(str(event.message_chain)) # 打印消息内容
+```
+
+`on` 方法可以接受一个 `Event` 类型的子类，或字符串类型的事件名。
+
+```python {2}
+# 接收群消息
+@bot.on(GroupMessage) # 或 @bot.on('GroupMessage')
+async def handle_group_message(event: GroupMessage):
+    print(str(event.message_chain)) # 打印消息内容
+```
+
+:::tip
+在 [`mirai.models.events` 模块](https://yiri-mirai-api.vercel.app/models/events.html)中找到更多事件类型。
+:::
+
+事件处理器可以是同步的或异步的。
+
+```python
+# 接收群消息
+@bot.on(GroupMessage)
+def handle_group_message_sync(event: GroupMessage):
+    print(str(event.message_chain)) # 打印消息内容
+```
+
+`on` 方法的第二个参数是 `priority`，用于指定事件处理器的优先级。值越小，优先程度越高。默认值为 0。
+
+```python
+# 接收群消息
+@bot.on(GroupMessage)
+def handle_group_message(event: GroupMessage):
+    print(str(event.message_chain)) # 打印消息内容
+
+
+@bot.on(GroupMessage, priority=1)
+def handle_group_message_another(event: GroupMessage):
+    print('After handle_group_message') # 这句话会在消息内容之后打印
+```
+
+:::note
+`priority` 参数曾经在 v0.1.3 被删除。v0.2.1 更新后，重新加入了 `priority` 功能。
+:::
+
+事件处理器接受唯一的一个参数 `event`，它是一个 `Event` 类型的对象，包含了事件的相关信息。
+
+### 生命周期
+
+YiriMirai 提供了两个特殊的事件 `Startup` 和 `Shutdown`，用于在程序启动和关闭时进行相关操作。
+
+YiriMirai 保证这两个事件触发时，机器人处于登录状态。因此，可以在处理这两个事件时调用 API。
+
+```python
+@bot.on(Startup)
+async def startup(_: Startup):
+    print(repr(bot.session_info.get()))
+```
+
+## 事件传播
+
+事件传播指的是当一个事件被触发时，它所在的事件链的所有事件也会被触发。
+
+当使用 Mirai 对象注册事件处理器时，事件传播使用的是**继承事件链**，一个事件会传播到它的父事件和祖先事件。例如，`MessageEvent` 是 `FriendMessage` 和 `GroupMessage` 的父类，因此注册 `MessageEvent` 的事件处理器可以同时接收这两个事件。
+
+```python
+from mirai import GroupMessage, FriendMessage, MessageEvent
+
+@bot.on(GroupMessage)
+async def handle_group_message(event: GroupMessage):
+    print("收到群消息。")
+
+@bot.on(FriendMessage)
+async def handle_friend_message(event: FriendMessage):
+    print("收到好友消息。")
+
+@bot.on(MessageEvent)
+async def handle_message_event(event: MessageEvent):
+    # 无论是群消息还是好友消息，这里都会被触发。
+    print(f"收到消息，类型为{event.type}。")
+```
+
+import EventChain from "../others/event-chains.mdx";
+
+<EventChain />
+
+你可以从 `mirai.models.events` 模块引入这些事件。部分常用的事件也可从顶层模块 `mirai` 的命名空间引入。
+
+## 获取事件的信息
+
+事件处理器接收唯一参数 `event`，它是一个 `Event` 类型的对象，包含了事件的相关信息。
+
+一般来说，`event` 参数会传入一个 `Event` 的子类对象，具体类型与注册事件处理器时传入的事件类型相同。
+
+YiriMirai 通过 pydantic 解析事件信息。`Event` 类型是 pydantic 的模型，可以从属性中获取事件信息。
+
+例如：
+
+```python
+@bot.on(Event)
+async def handle_message_event(event: Event):
+    print(f"收到事件{event.type}。") # 获取事件名称
+
+@bot.on(FriendMessage)
+async def handle_friend_message(event: FriendMessage):
+    print("收到好友消息。",
+        f"来源：{event.friend.nickname}", # 获取好友昵称
+        f"来源qq号：{event.friend.id}", # 获取好友qq号
+        f"消息内容：{event.message_chain}" # 获取消息链
+    )
+```
+
+关于不同事件可用的属性，可以参考 mirai-api-http 的[文档](https://project-mirai.github.io/mirai-api-http/api/EventType.html)，或查看 YiriMirai 的 [API 文档](https://yiri-mirai-api.vercel.app/models/events.html)。
+
+## 快速响应
+
+在事件处理器中，返回一个 API 调用的 corotine，即可快速响应。
+
+```python
+@bot.on(FriendMessage)
+def handle_friend_message(event: FriendMessage):
+    return bot.send_friend_message(event.sender.id, [Plain('Hello, World!')])
+```
+
+快速响应可以用于在同步的事件处理器中调用 API。
+
+有的时候使用快速响应可以增强代码的可读性。
+
+```python
+# 同意所有加好友申请
+@bot.on(NewFriendRequestEvent)
+def handle_new_friend_request(event: NewFriendRequestEvent):
+    return bot.resp_new_friend_request_event(
+        event_id=event.event_id,
+        from_id=event.from_id,
+        group_id=event.group_id,
+        operate=RespOperate.ALLOW,
+        message=''
+    )
+```
+
+:::tip
+当只使用 WebHook Adapter 时，只能使用快速响应调用 API。
+:::
