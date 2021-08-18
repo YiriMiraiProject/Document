@@ -30,9 +30,9 @@ jobs:
       - name: build site
         run: |
           yarn build
-          mv ./build ./yiri-mirai
+          mv ./build ./docs/yiri-mirai
 
       - name: deploy
         run: |
-          vercel link "$PWD/yiri-mirai" --confirm --token=${{ secrets.VERCEL_TOKEN }}
-          vercel deploy "$PWD/yiri-mirai" --prod --token=${{ secrets.VERCEL_TOKEN }}
+          vercel link "$PWD/docs/yiri-mirai" --confirm --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy "$PWD/docs/yiri-mirai" --prod --token=${{ secrets.VERCEL_TOKEN }}
