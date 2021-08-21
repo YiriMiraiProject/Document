@@ -12,4 +12,4 @@ sidebar_position: 5.1
 
 ## 可用的拓展模块
 
-- [Trigger](trigger.mdx) 事件触发器：提供更多处理事件的方式。
+- [Trigger](trigger/intro.mdx) 事件触发器：提供更多处理事件的方式。
