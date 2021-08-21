@@ -1,0 +1,52 @@
+---
+sidebar_position: 5.11
+---
+
+# 简介
+
+本项目的 Github 页：[YiriMiraiProject/Trigger](https://github.com/YiriMiraiProject/Trigger)。
+
+## 事件触发器有什么用？
+
+如果大家用过 Graia Framework，那么应该知道一个非常实用的功能：中断。它可以实现这样的效果：
+
+import { ChatBox, ChatMessage } from "@site/src/components/ChatMessage.js";
+
+<ChatBox>
+  <ChatMessage name="忘忧北萱草" msg="执行命令 command" />
+  <ChatMessage name="Yiri" msg="发送 /confirm 以确认。" />
+  <ChatMessage name="忘忧北萱草" msg="/confirm" />
+  <ChatMessage name="Yiri" msg="命令 command 执行成功。" />
+</ChatBox>
+
+又或者，需要对接收到的事件进行过滤和解析，比如只接受斜杠开头的消息：
+
+<ChatBox>
+  <ChatMessage name="忘忧北萱草" msg="command" />
+  <ChatMessage name="忘忧北萱草" msg="/command" />
+  <ChatMessage name="Yiri" msg="命令 command 执行成功。" />
+</ChatBox>
+
+这些场景，事件触发器都可以满足你的需要。
+
+## 安装
+
+从 PyPI 安装：
+
+```shell
+pip install yiri-mirai-trigger
+# 或者使用 poetry
+poetry add yiri-mirai-trigger
+```
+
+安装之后，事件触发器将在 `mirai_extensions.trigger` 模块中。
+
+## 使用
+
+事件触发器提供了[中断控制器](interrupt.mdx)和[事件接收控制器](handler.mdx)，分别处理上面提到的两种场景。
+
+具体的使用方式，请看后续的文档。
+
+## API 文档
+
+本项目的 API 文档见[这里](https://yirimiraiproject.github.io/Trigger/)。

@@ -27,7 +27,7 @@ async def handle_group_message(event: GroupMessage):
 ```
 
 :::tip
-在 [`mirai.models.events` 模块](https://yiri-mirai-api.vercel.app/models/events.html)中找到更多事件类型。
+在 [`mirai.models.events`](https://yiri-mirai-api.vercel.app/models/events.html) 模块中找到更多事件类型。
 :::
 
 事件处理器可以是同步的或异步的。
@@ -98,7 +98,21 @@ import EventChain from "../others/event-chains.mdx";
 
 <EventChain />
 
-你可以从 `mirai.models.events` 模块引入这些事件。部分常用的事件也可从顶层模块 `mirai` 的命名空间引入。
+你可以从 [`mirai.models.events`](https://yiri-mirai-api.vercel.app/models/events.html) 模块引入这些事件。部分常用的事件也可从顶层模块 `mirai` 的命名空间引入。
+
+## 传播中止
+
+如果想要阻止事件被其他事件处理器监听，或者想要阻止事件向上一级事件链传播，可以采用传播中止的方式。
+
+YiriMirai 通过抛出异常实现传播中止。在 [`mirai.exceptions`](https://yiri-mirai-api.vercel.app/exceptions.html) 模块中，定义了以下几个异常：
+
+ - `StopPropagation`：终止事件处理器执行，并停止事件向上传播。
+ - `StopExecution`：终止事件处理器执行，但不阻止事件向上传播。
+ - `SkipExecution`：跳过同优先度的事件处理器，进入下一优先度。
+
+:::note
+传播中止将在 v0.2.4 中支持。
+:::
 
 ## 获取事件的信息
 

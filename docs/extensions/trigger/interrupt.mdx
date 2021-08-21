@@ -1,0 +1,223 @@
+---
+sidebar_position: 5.12
+---
+
+# 中断控制器
+
+## 中断控制器的作用
+
+中断控制器定义在 [`mirai_extensions.trigger.interrupt`](https://yirimiraiproject.github.io/Trigger/interrupt.html) 模块，提供了一个消息处理器中间监听另一个消息事件的功能。
+
+利用它，可以实现这样的功能：
+
+import { ChatBox, ChatMessage } from "@site/src/components/ChatMessage.js";
+
+<ChatBox>
+  <ChatMessage name="忘忧北萱草" msg="你是谁？" />
+  <ChatMessage name="Yiri" msg="我是 Yiri。你呢？" />
+  <ChatMessage name="忘忧北萱草" msg="我是忘忧北萱草。" />
+  <ChatMessage name="Yiri" msg="你好，忘忧北萱草。" />
+</ChatBox>
+
+## 使用中断控制器
+
+首先，我们需要定义一个中断控制器：
+
+```python
+from mirai import Mirai
+from mirai_extensions.trigger import InterruptControl
+
+bot = Mirai(...)
+inc = InterruptControl(bot)
+```
+
+接下来，在需要执行中断的地方定义过滤器，并使用 `inc.wait` 等待事件触发：
+
+```python
+from mirai_extensions.trigger import Filter
+
+@bot.on(FriendMessage)
+async def on_friend_message(event: FriendMessage):
+    if str(event.message_chain).strip() == '你是谁？':
+        await bot.send(event, '我是 Yiri。你呢？')
+
+        @Filter(FriendMessage)
+        async def waiter(event_new: FriendMessage):
+            if event.sender.id == event_new.sender.id:
+                msg = str(event.message_chain)
+                if msg.startswith('我是'):
+                    return msg[2:].rstrip('。')
+
+        name = await inc.wait(waiter)
+        await bot.send(event, f'你好，{name}。')
+```
+
+我们来分析一下这段代码的流程：
+
+首先，我们正常地定义了事件处理器，接受 `FriendMessage` 事件。在事件处理器中，我们简单地判断消息是否是“*你是谁*”，如果是，发送一条“*我是 Yiri。你呢？*”。
+
+```python
+@bot.on(FriendMessage)
+async def on_friend_message(event: FriendMessage):
+    if str(event.message_chain).strip() == '你是谁':
+        await bot.send(event, '我是 Yiri。你呢？')
+```
+
+接下来，我们定义了一个过滤器，这个过滤器监听另外一个 `FriendMessage` 事件。在过滤器中，我们判断消息是否以“*我是*”开头，如果是，返回消息的剩余部分。
+
+```python
+@Filter(FriendMessage)
+async def waiter(event_new: FriendMessage):
+    if event.sender.id == event_new.sender.id:
+        msg = str(event.message_chain)
+        if msg.startswith('我是'):
+            return msg[2:]
+```
+
+过滤器定义后不会立即执行。我们使用 `inc.wait` 方法等待对应的事件触发。这个方法会打断当前的事件处理器，等待新的事件。
+
+当好友发送新的消息时，这个消息会传递给过滤器。过滤器负责检查消息是否符合条件，并对消息进行解析。在这里我们编写了这样的逻辑：
+
+- 如果好友发送的消息格式正确，过滤器返回消息的剩余部分。比如，好友发送“*我是忘忧北萱草*”，过滤器返回 `'忘忧北萱草'`。
+- 如果好友发送的消息格式不正确，或者不是与之前的 FriendMessage 是同一个好友，过滤器隐式地返回 `None`。
+
+当触发器返回的值不为 `None` 时，中断控制器会将流程转回 `inc.wait`。`inc.wait` 会返回过滤器解析后的值。
+
+```python
+name = await inc.wait(waiter)
+await bot.send(event, f'你好，{name}。')
+```
+
+这时 `name` 变量就是好友输入的名字。
+
+最后，我们发送一条消息，向好友打个招呼。
+
+总结一下，中断控制器的完整代码：
+
+```python
+from mirai import Mirai
+from mirai_extensions.trigger import InterruptControl, Filter
+
+bot = Mirai(...)
+inc = InterruptControl(bot)
+
+@bot.on(FriendMessage)
+async def on_friend_message(event: FriendMessage):
+    if str(event.message_chain).strip() == '你是谁？':
+        await bot.send(event, '我是 Yiri。你呢？')
+
+        @Filter(FriendMessage)
+        async def waiter(event_new: FriendMessage):
+            if event.sender.id == event_new.sender.id:
+                msg = str(event.message_chain)
+                if msg.startswith('我是'):
+                    return msg[2:].rstrip('。')
+
+        name = await inc.wait(waiter)
+        await bot.send(event, f'你好，{name}。')
+```
+
+## 等待超时
+
+`inc.wait` 有一个可选参数 `timeout`，表示等待的超时。如果超时，`inc.wait` 会返回 `None`。
+
+```python
+name = await inc.wait(waiter, timeout=60.)
+if name is not None:
+    await bot.send(event, f'你好，{name}。')
+```
+
+:::tip 中断控制器会“卡住”吗？
+不会。这就是异步的作用所在，当你等待一个事件，可以切出控制流，继续处理其他的事件。所以，不要担心因为中断控制器让你的程序卡住。
+
+但是，从另外一个角度来说，中断控制器确实会“卡住”。按照事件总线的逻辑，只有当某个优先度的事件处理器调用完成后，才会执行下一优先度的事件处理器。所以，当等待触发器的时候，事件无法被传递到下一优先度的事件处理器。解决这个问题的办法是，**为带有中断的事件处理器分配较低的优先度**，比如：
+
+```python
+@bot.on(FriendMessage, priority=15)
+async def on_friend_message(event: FriendMessage):
+    ...
+    something = await inc.wait(waiter)
+    ...
+```
+
+同时，我们建议为所有的 `inc.wait` 附加超时，以防止长时间未使用的中断控制器不被及时释放。
+:::
+
+
+## 更多过滤器
+
+[`mirai_extensions.trigger.message`](https://yirimiraiproject.github.io/Trigger/message.html) 模块定义了几个简单封装的过滤器，包括 `FriendMessageFilter` `GroupMessageTrigge` 和 `TempMessageFilter`。
+
+`FriendMessageFilter` 可以预检查是否是对应好友发送的消息。在 `friend` 参数中传入好友的 QQ 号，或者 `Friend` 对象。
+
+```python
+from mirai_extensions.trigger.message import FriendMessageFilter
+
+@bot.on(FriendMessage)
+async def on_friend_message(event: FriendMessage):
+    if str(event.message_chain).strip() == '你是谁':
+        await bot.send(event, '我是 Yiri。你呢？')
+
+        @FriendMessageFilter(friend=event.sender)  # 只接受与 event.sender 相同的好友
+        async def waiter(event_new: FriendMessage):
+            msg = str(event.message_chain)
+            if msg.startswith('我是'):
+                return msg[2:]
+
+        name = await inc.wait(waiter)
+        await bot.send(event, f'你好，{name}。')
+```
+
+`GroupMessageTrigger` 可以预检查是否是对应群中某个群成员发送的消息：
+
+```python
+from mirai_extensions.trigger.message import GroupMessageTrigger
+
+@bot.on(GroupMessage)
+async def on_group_message(event: GroupMessage):
+    if str(event.message_chain).strip() == '你是谁':
+        await bot.send(event, '我是 Yiri。你呢？')
+
+        @GroupMessageTrigger(group_member=event.sender)  # 只接受与 event.sender 相同的群成员
+        async def trigger(event_new: GroupMessage):
+            msg = str(event.message_chain)
+            if msg.startswith('我是'):
+                return msg[2:].rstrip('。')
+
+        name = await inc.wait(trigger)
+        await bot.send(event, f'你好，{name}。')
+```
+
+除去 `group_member` 参数外，`GroupMessageTrigger` 还支持 `group` 和 `quote` 两个参数，前者用于指定群，后者用于指定必须回复某条消息。
+
+和上面一样，`group_member` 参数可以传入 QQ 号或者 `GroupMember` 对象，`group` 参数可以传入群号或者 `Group` 对象。当 `group` 未指定，并且 `group_member` 传入了 `GroupMember` 对象时，会自动从 `group_member` 中获取对应的群。如果想要忽略群是否匹配，可以给 `group` 参数显式地传入 `None`。
+
+`quote` 参数可以传入 `MessageEvent`，或 `MessageChain`，或消息的 message_id。只有回复指定的消息，才会被触发。
+
+```python
+@bot.on(GroupMessage)
+async def on_group_message(event: GroupMessage):
+    if str(event.message_chain).strip() == '你是谁':
+        message_id = await bot.send(event, '我是 Yiri。你呢？')
+
+        @GroupMessageTrigger(quote=message_id)  # 只接受回复机器人的消息
+        async def trigger(event_new: GroupMessage):
+            msg = str(event.message_chain)
+            if msg.startswith('我是'):
+                return msg[2:].rstrip('。')
+
+        name = await inc.wait(trigger)
+        await bot.send(event, f'你好，{name}。')
+```
+
+`TempMessageFilter` 的定义方式与 `GroupMessageTrigger` 几乎相同，它用于接收临时消息。
+
+## 工作优先级
+
+中断控制器在创建时可以通过 `priority` 参数指定一个优先级，称为中断控制器的工作优先级。
+
+工作优先级规定了中断控制器向事件总线注册事件处理器时所用的优先级。例如，将工作优先级设置为1，那么所有的过滤器将在事件总线中的优先级为0的事件处理器之后运行。
+
+除此之外，在 `inc.wait` 方法中，也有一个参数 `priority`，它指定的是触发器的优先级。
+
+与工作优先级不同，触发器的优先级和事件总线中的优先级不互通，它只对同一个中断控制器下的多个触发器起作用。

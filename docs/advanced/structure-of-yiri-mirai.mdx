@@ -37,7 +37,7 @@ import StructureDiagram from "@site/src/components/StructureDiagram.js";
 
 模型层负责将基础层得到的数据解析为 pydantic 模型，以更方便地获取和操作其中的信息。
 
-模型层的模块全部定义于 `mirai.models` 命名空间中。
+模型层的模块全部定义于 [`mirai.models`](https://yiri-mirai-api.vercel.app/models/index.html) 命名空间中。
 
 以下是模型层包含的主要模块：
 
@@ -47,7 +47,7 @@ API 调用相关。
 
 #### mirai.models.bus
 
-模型事件总线。模型事件总线拓展了事件总线的功能，使之可以使用 `mirai.models.events` 中定义的事件类型来注册和接收事件。
+模型事件总线。模型事件总线拓展了事件总线的功能，使之可以使用 [`mirai.models.events`](https://yiri-mirai-api.vercel.app/models/events.html) 中定义的事件类型来注册和接收事件。
 
 `Mirai` 和 `SimpleMirai` 的一个区别就在于，`Mirai` 使用了模型事件总线，而 `SimpleMirai` 使用了普通的事件总线。
 

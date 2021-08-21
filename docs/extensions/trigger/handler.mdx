@@ -1,0 +1,84 @@
+---
+sidebar_position: 5.13
+---
+
+# 事件接收控制器
+
+## 事件接收控制器的作用
+
+与中断控制器不同，事件接收控制器面对的是另一种场景：对事件内容进行过滤和解析。
+
+比如只接受斜杠开头的消息：
+
+<ChatBox>
+  <ChatMessage name="忘忧北萱草" msg="command" />
+  <ChatMessage name="忘忧北萱草" msg="/command" />
+  <ChatMessage name="Yiri" msg="命令 command 执行成功。" />
+</ChatBox>
+
+## 使用事件接受控制器
+
+同样，首先定义事件接收控制器。
+
+```python
+from mirai import Mirai
+from mirai_extensions.trigger import HandlerControl, Filter
+
+bot = Mirai(...)
+hdc = HandlerControl(bot)
+```
+
+接下来，定义过滤器，在过滤器中对事件进行过滤和解析：
+
+```python
+@Filter(FriendMessage)
+async def filter_(event: FriendMessage):
+    msg = str(event.message_chain)
+    if msg.startswith('/'):
+        return msg[1:]
+```
+
+过滤器负责检查消息是否符合条件，并对消息进行解析。在这里我们编写了这样的逻辑：
+
+- 如果好友发送的消息格式正确，过滤器返回消息的剩余部分。比如，好友发送“/command”，过滤器返回 `'command'`。
+- 如果好友发送的消息格式不正确，过滤器隐式地返回 `None`。
+
+然后，使用 `hdc.on` 定义事件接收器。
+
+```python
+@hdc.on(filter_)
+async def handler(event: FriendMessage, payload: str):
+    await bot.send(event, f'命令 {payload} 执行成功。')
+```
+
+此处的事件接收器和使用 `bot.on` 定义的事件处理器有所不同，它接受两个参数 `event` 和 `payload`。`event` 是接收到的原始事件，`payload` 是过滤器的返回值。
+
+总结一下，事件接收控制器的完整代码：
+
+```python
+from mirai import Mirai
+from mirai_extensions.trigger import Filter, HandlerControl
+
+bot = Mirai(...)
+hdc = HandlerControl(bot)
+
+@Filter(FriendMessage)
+async def filter_(event: FriendMessage):
+    msg = str(event.message_chain)
+    if msg.startswith('/'):
+        return msg[1:]
+
+@hdc.on(filter_)
+async def handler(event: FriendMessage, payload: str):
+    await bot.send(event, f'命令 {payload} 执行成功。')
+```
+
+## 工作优先级
+
+与中断控制器一样，事件接受控制器在创建时可以通过 `priority` 参数指定一个优先级，称为事件接受控制器的工作优先级。
+
+工作优先级规定了事件接受控制器向事件总线注册事件处理器时所用的优先级。例如，将工作优先级设置为1，那么所有的过滤器将在事件总线中的优先级为0的事件处理器之后运行。
+
+除此之外，在 `hdc.on` 方法中，也有一个参数 `priority`，它指定的是事件接收器的优先级。
+
+事件接收器的优先级和事件总线中的优先级不互通，它只对同一个事件接收控制器下的多个事件接收器起作用。

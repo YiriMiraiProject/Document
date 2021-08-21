@@ -6,7 +6,7 @@ sidebar_position: 3.1
 
 Mirai 对象表示一个机器人实例。我们要进行的一切操作几乎都是在这个对象上进行的。
 
-`Mirai` 类定义在 `mirai.bot` 模块，同时也存在于顶层模块 `mirai` 的命名空间中，你可以通过 `from mirai import Mirai` 来导入。
+`Mirai` 类定义在 [`mirai.bot`](https://yiri-mirai-api.vercel.app/bot.html) 模块，同时也存在于顶层模块 `mirai` 的命名空间中，你可以通过 `from mirai import Mirai` 来导入。
 
 ## 创建 Mirai 对象
 
