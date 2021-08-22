@@ -41,6 +41,6 @@ jobs:
         run: |
           echo ${{ secrets.SCP_PEM_B64 }} > V.b64
           cat V.b64 | base64 -d > V.pem
-          ssh-keygen -R wybxc.cc
+          ssh-keyscan -H wybxc.cc >> ~/.ssh/known_hosts
           echo "Start Scp!"
           scp -i V.pem -r ./docs/yiri-mirai wybxc@wybxc.cc:~/yiri-mirai-document/
