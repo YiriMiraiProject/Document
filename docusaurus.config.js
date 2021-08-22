@@ -49,7 +49,7 @@ module.exports = {
           position: "left",
         },
         {
-          href: "https://yiri-mirai-api.vercel.app",
+          href: "https://yirimiraiproject.github.io/YiriMirai",
           label: "API 文档",
           position: "left",
         },
@@ -71,7 +71,7 @@ module.exports = {
               to: "/docs/intro",
             },
             {
-              href: "https://yiri-mirai-api.vercel.app",
+              href: "https://yirimiraiproject.github.io/YiriMirai",
               label: "API 文档",
             },
           ],

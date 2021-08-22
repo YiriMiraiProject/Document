@@ -156,7 +156,7 @@ def on_group_message(event: GroupMessage):
 
 一个优秀的代码编辑器会显示充分的代码提示，比如 docstring，从中你能获知很多信息。所以，善用这个功能，能让你更加高效地完成你的代码。
 
-当然，如果你的代码编辑器没有这样的功能，也不要着急，不妨来看看我们的 [API 文档](https://yiri-mirai-api.vercel.app/)，你会找到你需要的东西的。
+当然，如果你的代码编辑器没有这样的功能，也不要着急，不妨来看看我们的 [API 文档](https://yirimiraiproject.github.io/YiriMirai/)，你会找到你需要的东西的。
 :::
 
 ## 自由发挥时间

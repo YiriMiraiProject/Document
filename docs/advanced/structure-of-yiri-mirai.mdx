@@ -37,7 +37,7 @@ import StructureDiagram from "@site/src/components/StructureDiagram.js";
 
 模型层负责将基础层得到的数据解析为 pydantic 模型，以更方便地获取和操作其中的信息。
 
-模型层的模块全部定义于 [`mirai.models`](https://yiri-mirai-api.vercel.app/models/index.html) 命名空间中。
+模型层的模块全部定义于 [`mirai.models`](https://yirimiraiproject.github.io/YiriMirai/models/index.html) 命名空间中。
 
 以下是模型层包含的主要模块：
 
@@ -47,7 +47,7 @@ API 调用相关。
 
 #### mirai.models.bus
 
-模型事件总线。模型事件总线拓展了事件总线的功能，使之可以使用 [`mirai.models.events`](https://yiri-mirai-api.vercel.app/models/events.html) 中定义的事件类型来注册和接收事件。
+模型事件总线。模型事件总线拓展了事件总线的功能，使之可以使用 [`mirai.models.events`](https://yirimiraiproject.github.io/YiriMirai/models/events.html) 中定义的事件类型来注册和接收事件。
 
 `Mirai` 和 `SimpleMirai` 的一个区别就在于，`Mirai` 使用了模型事件总线，而 `SimpleMirai` 使用了普通的事件总线。
 
@@ -79,7 +79,7 @@ SimpleMirai 是 Mirai 的简化版本，它只包含了基础层，并且没有�
 
 ## 关于 MiraiBaseModel
 
-[`MiraiBaseModel`](https://yiri-mirai-api.vercel.app/models/base.html#mirai.models.base.MiraiBaseModel) 定义于 `mirai.models.base` 模块。它是 YiriMirai 所有 pydantic 模型的基类。
+[`MiraiBaseModel`](https://yirimiraiproject.github.io/YiriMirai/models/base.html#mirai.models.base.MiraiBaseModel) 定义于 `mirai.models.base` 模块。它是 YiriMirai 所有 pydantic 模型的基类。
 
 `MiraiBaseModel` 启用了三项配置：
 1. 允许解析时传入额外的值，并将额外值保存在模型中。
@@ -90,7 +90,7 @@ SimpleMirai 是 Mirai 的简化版本，它只包含了基础层，并且没有�
 
 ### MiraiIndexedModel
 
-[`MiraiIndexedModel`](https://yiri-mirai-api.vercel.app/models/base.html#mirai.models.base.MiraiIndexedModel) 定义于 `mirai.models.base` 模块，使用了 metaclass，以支持通过子类名获取子类的反射功能。
+[`MiraiIndexedModel`](https://yirimiraiproject.github.io/YiriMirai/models/base.html#mirai.models.base.MiraiIndexedModel) 定义于 `mirai.models.base` 模块，使用了 metaclass，以支持通过子类名获取子类的反射功能。
 
 `Event` `ApiModel` 和 `MessageComponent` 能够自动将数据解析到正确的子类，正是基于 `MiraiIndexedModel` 的这一反射功能。
 

@@ -4,6 +4,21 @@ sidebar_position: 6
 
 # 更新日志
 
+## 0.2.3.1
+
+发布日期：2021年8月16日
+
+紧急修复：[#23](https://github.com/YiriMiraiProject/YiriMirai/issues/23)。
+
+## 0.2.3
+
+发布日期：2021年8月14日
+
+新增内容：
+
+1. 修复了 WebSocket 适配的诸多问题，并增加了心跳机制，防止连接断开。
+2. 重写 `bot.pyi`。
+
 ## v0.2.2.1
 
 发布日期：2021年8月9日
@@ -13,7 +28,7 @@ sidebar_position: 6
 新增功能：
 
 1. 新增 MiraiCode 消息组件。
-2. 新增 Mirai.file_info 的 with_download_info 参数。
+2. 新增 `Mirai.file_info` 的 `with_download_info` 参数。
 
 ## v0.2.1
 

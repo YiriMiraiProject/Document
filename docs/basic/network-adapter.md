@@ -16,7 +16,7 @@ sidebar_position: 3.5
 
 ## 创建 Adapter
 
-接口适配器定义在 [`mirai.adapters`](https://yiri-mirai-api.vercel.app/adapters/index.html) 模块，方便起见，也可从顶层模块 `mirai` 的命名空间中引入。
+接口适配器定义在 [`mirai.adapters`](https://yirimiraiproject.github.io/YiriMirai/adapters/index.html) 模块，方便起见，也可从顶层模块 `mirai` 的命名空间中引入。
 
 `Adapter` 是一个抽象类，应使用其子类实例化。
 

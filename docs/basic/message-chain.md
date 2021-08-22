@@ -12,7 +12,7 @@ mirai 为了处理富文本消息，采用了消息链（Message Chain）这一�
 
 消息链可以看作是一系列消息组件（Message Component）构成的列表。消息组件表示消息中的一部分，比如纯文本 `Plain`，At 某人 `At` 等等。
 
-关于可用的消息组件，参看 [API 文档](https://yiri-mirai-api.vercel.app/models/message.html)。
+关于可用的消息组件，参看 [API 文档](https://yirimiraiproject.github.io/YiriMirai/models/message.html)。
 
 ## 构造消息链
 
