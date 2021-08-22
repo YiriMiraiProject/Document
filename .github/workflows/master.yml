@@ -44,4 +44,4 @@ jobs:
           # ssh-keyscan -H wybxc.cc >> ~/.ssh/known_hosts
           chmod 600 V.pem
           echo "Start Scp!"
-          scp -i V.pem -r -o "StrictHostKeyChecking no" ./docs/yiri-mirai wybxc@wybxc.cc:~/yiri-mirai-document/
+          scp -i V.pem -r -o "StrictHostKeyChecking no" ./docs/yiri-mirai/ wybxc@wybxc.cc:~/yiri-mirai-document/
