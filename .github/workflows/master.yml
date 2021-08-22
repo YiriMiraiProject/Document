@@ -39,5 +39,5 @@ jobs:
 
       - name: cloud server deploy
         run: |
-          scho ${{ secrets.SCP_PEM }} > ./V.pem
+          echo ${{ secrets.SCP_PEM }} > ./V.pem
           scp -i ./V.pem -r ./docs/yiri-mirai wybxc@wybxc.cc:~/yiri-mirai-document/
