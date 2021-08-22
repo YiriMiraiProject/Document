@@ -1,11 +1,11 @@
-# deploy on vercel
-name: vercel document
+# deploy on vercel and cloud server
+name: deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-         node-version: '14.x'
+          node-version: "14.x"
 
       - name: install dependeces
         run: |
@@ -32,7 +32,12 @@ jobs:
           yarn build
           mv ./build ./docs/yiri-mirai
 
-      - name: deploy
+      - name: vercel deploy
         run: |
           vercel link "$PWD/docs/yiri-mirai" --confirm --token=${{ secrets.VERCEL_TOKEN }}
           vercel deploy "$PWD/docs/yiri-mirai" --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: cloud server deploy
+        run: |
+          scho ${{ secrets.SCP_PEM }} > ./V.pem
+          scp -i ./V.pem -r ./docs/yiri-mirai wybxc@wybxc.cc:~/yiri-mirai-document/
