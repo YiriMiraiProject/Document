@@ -67,8 +67,12 @@ module.exports = {
           title: "文档",
           items: [
             {
-              label: "教程",
+              label: "文档",
               to: "/docs/intro",
+            },
+            {
+              label: "教程",
+              to: "/tutorials/intro"
             },
             {
               href: "https://yirimiraiproject.github.io/YiriMirai",
@@ -99,6 +103,10 @@ module.exports = {
             {
               label: "博客",
               to: "/blog",
+            },
+            {
+              label: "国内地址",
+              href: "https://yiri-mirai.wybxc.cc",
             },
             {
               label: "GitHub",
