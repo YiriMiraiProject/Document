@@ -59,12 +59,16 @@ await bot.send_friend_message(12345678, MessageChain([
 
 ## 在消息链上的操作
 
+### 遍历
+
 可以使用 for 循环遍历消息链中的消息组件。
 
 ```py
 for component in message_chain:
     print(repr(component))
 ```
+
+### 比较
 
 可以使用 `==` 运算符比较两个消息链是否相同。
 
@@ -80,6 +84,8 @@ another_msg_chain = MessageChain([
 print(message_chain == another_msg_chain)
 'True'
 ```
+
+### 检查子链
 
 可以使用 `in` 运算检查消息链中：
 
@@ -102,6 +108,13 @@ if 'Hello' in message_chain:
     print('Hi!')
 ```
 
+消息链的 `has` 方法和 `in` 等价。
+
+```py
+if message_chain.has(AtAll):
+    print('AtAll')
+```
+
 也可以使用 `>=` 和 `<=` 运算符：
 
 ```py
@@ -115,6 +128,8 @@ if MessageChain([At(bot.qq), Plain('Hello!')]) <= message_chain:
 如需对文本进行部分匹配，请采用 mirai 码字符串匹配的方式。
 :::
 
+### 索引与切片
+
 消息链对索引操作进行了增强。以消息组件类型为索引，获取消息链中的全部该类型的消息组件。
 
 ```py
@@ -122,12 +137,61 @@ plain_list = message_chain[Plain]
 '[Plain("Hello World!")]'
 ```
 
-以 `类型: 数量` 为索引，获取前至多多少个该类型的消息组件。
+以 `类型, 数量` 为索引，获取前至多多少个该类型的消息组件。
 
 ```py
-plain_list_first = message_chain[Plain: 1]
+plain_list_first = message_chain[Plain, 1]
 '[Plain("Hello World!")]'
 ```
+
+消息链的 `get` 方法和索引操作等价。
+
+```py
+plain_list_first = message_chain.get(Plain)
+'[Plain("Hello World!")]'
+```
+
+消息链的 `get` 方法还可指定第二个参数 `count`，这相当于以 `类型, 数量` 为索引。
+
+```py
+plain_list_first = message_chain.get(Plain, 1)
+# 这等价于
+plain_list_first = message_chain[Plain, 1]
+```
+
+### 连接与复制
+
+可以用加号连接两个消息链。
+
+```py
+MessageChain(['Hello World!']) + MessageChain(['Goodbye World!'])
+# 返回 MessageChain([Plain("Hello World!"), Plain("Goodbye World!")])
+```
+
+可以用 `*` 运算符复制消息链。
+
+```py
+MessageChain(['Hello World!']) * 2
+# 返回 MessageChain([Plain("Hello World!"), Plain("Hello World!")])
+```
+
+### 其他
+
+
+除此之外，消息链还支持很多 list 拥有的操作，比如 `index` 和 `count`。
+
+```py
+message_chain = MessageChain([
+    AtAll(),
+    "Hello World!",
+])
+message_chain.index(Plain)
+# 返回 0
+message_chain.count(Plain)
+# 返回 1
+```
+
+消息链对这些操作进行了拓展。在传入元素的地方，一般都可以传入元素的类型。
 
 ## 使用 Mirai 码
 

@@ -57,6 +57,81 @@ async with bot.use_adapter(HTTPAdapter.via(bot)):
     ...
 ```
 
+## 辅助方法
+
+Mirai 类对一些常用的 API 进行了封装。
+
+### 发送消息
+
+`send` 方法是对 `send_friend_message` `send_group_message` `send_temp_message` 三者的封装，可以自动判断消息目标类型，选择对应的 API。
+
+`send` 方法的第一个参数是消息目标，第二个参数是消息内容。消息目标可以是 `MessageEvent` 或者 `Entity`，消息内容可以是消息链或者可转化为消息链的对象。
+
+大多数情况下，在接收消息事件中，可以写为：
+
+```python
+@bot.on(FriendMessage)
+async def reply(event: FriendMessage):
+    await bot.send(event, 'Hello, World!')
+```
+
+`send` 方法还有第三个参数 `quote`，用于指定是否引用消息目标中包含的消息。
+
+```python
+await bot.send(event, 'Hello, World!', quote=True)
+```
+
+### 处理请求
+
+处理加好友、加群请求时，可以使用 `allow` `decline` 或 `ignore` 方法。
+
+```python
+@bot.on(NewFriendRequestEvent)
+async def allow_request(event: NewFriendRequestEvent):
+    await bot.allow(event)
+```
+
+使用 `message` 参数指定处理请求的原因：
+
+```python
+@bot.on(NewFriendRequestEvent)
+async def allow_request(event: NewFriendRequestEvent):
+    await bot.decline(event, '拒绝请求。')
+```
+
+`decline` 和 `ignore` 还有一个另外的参数 `ban`，表示是否拉黑。
+
+```python
+@bot.on(NewFriendRequestEvent)
+async def allow_request(event: NewFriendRequestEvent):
+    await bot.decline(event, '拒绝请求。', ban=True)
+```
+
+### 获取实体
+
+使用 `get_friend` 通过 QQ 号获取对应的 `Friend` 对象。
+
+```python
+friend = await bot.get_friend(12345678)
+```
+
+如果不是好友，或者因其他原因获取失败，此方法将返回 None。
+
+同样地，可以通过 `get_group` 获取对应的 `Group` 对象，通过 `get_group_member` 获取对应的 `GroupMember` 对象。
+
+```python
+group = await bot.get_group(12345678)
+group_member = await bot.get_group_member(12345678, 12345678)
+```
+
+有些事件（比如 `NudgeEvent`）中的来源不是 `Entity` 类型，而是 `Subject` 类型，这时可以使用 `get_entity` 方法转化为 `Entity`。
+
+```python
+@bot.on(NudgeEvent)
+async def handle_nudge(event: NudgeEvent):
+    entity = await bot.get_entity(event.subject)
+```
+
 ## 处理事件
 
 Mirai 对象的 `on` 方法用于注册事件处理器。
