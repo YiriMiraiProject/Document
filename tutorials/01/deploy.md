@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 2.6
 ---
 
 # 五：多适配器与部署

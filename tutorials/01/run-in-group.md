@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 2.3
 ---
 
 # 二：在群里运行
@@ -203,6 +203,6 @@ def on_group_message_new(event: GroupMessage):
 
 这一节我们成功地把机器人设置到了群里，处理和发送群消息。
 
-本节的示例代码在[这里](/examples/02.md)。
+本节的示例代码在[这里](./examples/02.md)。
 
 准备好了的话，就前往下一节吧。

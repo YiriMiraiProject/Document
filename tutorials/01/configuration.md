@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 2.1
 ---
 
 # 零：环境配置
@@ -126,7 +126,7 @@ Mirai Console Loader 公告栏
 2021-08-03 21:48:43 I/main: mirai-console started successfully.
 ```
 
-输入 `exit` 回车退出。
+输入 `exit` 回车退出 mirai-console。
 
 现在在文件夹中可以看到这些文件：
 
@@ -140,7 +140,7 @@ Mirai Console Loader 公告栏
 
 YiriMirai 依赖于 mirai-api-http V2，而 mirai-api-http 并不能通过 mirai-console-loader 自动安装（[原因](https://github.com/project-mirai/mirai-api-http/issues/381)），需要手动下载安装。
 
-在 mirai-api-http 的 [releases 页面](https://github.com/project-mirai/mirai-api-http) 下载最新的 release 版本。目前，YiriMirai 支持的版本为 mirai-api-http V2.1.0。
+在 mirai-api-http 的 [releases 页面](https://github.com/project-mirai/mirai-api-http) 下载最新的 release 版本。目前，YiriMirai 支持的版本为 mirai-api-http V2.2.0。
 
 将下载的 jar 文件放入 mirai-console 目录下的 `plugins` 文件夹中，然后重启 mirai-console。
 
@@ -197,9 +197,11 @@ adapterSettings:
 
 ![device-verify](/img/tutorials/configuration/device-verify.png)
 
-这时点击图中的蓝色链接“设备锁验证”，会在浏览器中打开验证页面，完成验证即可。
+~~这时点击图中的蓝色链接“设备锁验证”，会在浏览器中打开验证页面，完成验证即可。~~
 
-如果在电脑上验证不成功，可以复制下面的 URL 框中的内容，在手机中打开，然后使用另一台已登录此 QQ 号的手机扫码验证，这种方法成功率较高。
+~~如果在电脑上验证不成功，可以复制下面的 URL 框中的内容，在手机中打开，然后使用另一台已登录此 QQ 号的手机扫码验证，这种方法成功率较高。~~
+
+此连接必须在手机 QQ 中打开，不能在电脑浏览器或手机其他浏览器中打开。需要使用另一台已登录此 QQ 号的手机扫码验证。
 :::
 
 :::note 滑动验证码

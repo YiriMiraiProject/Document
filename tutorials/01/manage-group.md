@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 2.5
 ---
 
 # 四：使用机器人管理群
@@ -148,6 +148,6 @@ async def text_censor_event(event: GroupMessage):
 
 这一节我们为机器人实现了简单的群反垃圾信息功能。
 
-本节的示例代码在[这里](/examples/04.md)。
+本节的示例代码在[这里](./examples/04.md)。
 
 准备好了的话，就前往下一节吧。
