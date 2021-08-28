@@ -165,6 +165,7 @@ class SearchTree extends React.Component {
   onSearchChange = (e) => {
     const { dataList } = this.state;
     const { value } = e.target;
+    const lower = value.toLowerCase();
     this.setState({
       searchValue: value,
     });
@@ -173,7 +174,7 @@ class SearchTree extends React.Component {
     }
     const expandedNodeIds = dataList
       .map((item) => {
-        if (item.title.indexOf(value) > -1) {
+        if (item.title.toLowerCase().indexOf(lower) > -1) {
           return item.parentId > -1 ? item.parentId : null;
         }
         return null;
@@ -184,8 +185,9 @@ class SearchTree extends React.Component {
 
   render() {
     const { dataList, searchValue } = this.state;
+    const lowerValue = searchValue.toLowerCase();
     const renderNode = (item) => {
-      const index = item.title.indexOf(searchValue);
+      const index = item.title.toLowerCase().indexOf(lowerValue);
       const beforeStr = item.title.substr(0, index);
       const afterStr = item.title.substr(index + searchValue.length);
       const link = (

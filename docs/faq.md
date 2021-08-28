@@ -4,13 +4,17 @@ sidebar_position: 5
 
 # 常见问题
 
-## ModuleNotFoundError: No module named 'mirai'
+## 版本相关
+
+### ModuleNotFoundError: No module named 'mirai'
 
 1. 检查你有没有在正确的 python 环境下运行，尤其是在使用 conda 或 venv 这样的 python 环境管理器时。
 2. 重新安装 YiriMirai。使用 `pip install yiri-mirai --upgrade`。
 3. 试一下 `import YiriMirai`。如果你成功导入了，说明你安装了错误的版本。**从 0.1.1 开始，YiriMirai 的 PyPI 仓库名称变成了 `yiri-mirai`，而不是 `yirimirai`（注意短杠）**。使用 `pip install yiri-mirai` 安装正确的版本。
 
-## 端口冲突
+## 连接相关
+
+### 端口冲突
 
 可能的报错：
 ```
@@ -32,7 +36,7 @@ sidebar_position: 5
 bot.run(port=8099)
 ```
 
-## 启动后立即退出
+### 启动后立即退出
 
 如果你看到了这样的输出：
 
@@ -61,11 +65,23 @@ pip install uvicorn
 pip install hypercorn
 ```
 
-## AttributeError: 'coroutine' object has no attribute XXX
+### websockets.exceptions.InvalidstatusCode: server rejected webSocket connection: HTTP 404
+
+检查你的 mirai-api-http 版本。YiriMirai 需要 2.0.0 及以上版本。
+
+## 使用相关
+
+### AttributeError: 'coroutine' object has no attribute XXX
 
 你忘了 `await`。**所有**的 API 调用都需要 `await`，就像这样： `await bot.xxx()`。
 
-## 提问的艺术
+## 其他问题
+
+如果你的问题在此页上没有找到，你可以**在我们的社区（见网页页脚）询问**。
+
+如果你**确信你的问题是由 YiriMirai 导致的，并能明确问题发生的原因**，请在 [GitHub Issues](https://github.com/YiriMiraiProject/YiriMirai/issues) 上提出，我们会尽可能地解决这个问题。
+
+### 提问的艺术
 
 :::warning
 在提出问题之前，请先学习提问的艺术。
@@ -86,7 +102,7 @@ pip install hypercorn
 在提出技术问题前，检查你有没有做到：
 
 - 通读手册，试着自己找答案。
-- 在 FAQ （也就是下面的内容）里找答案。
+- 在 FAQ （也就是上面的内容）里找答案。
 - 在网上搜索。
 - 向你身边精于此道的朋友打听。
 
@@ -95,9 +111,3 @@ pip install hypercorn
 提问前，做好周全的思考，准备好你的问题。草率的发问只能得到草率的回答，或者根本得不到任何答案。越表现出在寻求帮助前为解决问题付出的努力，你越能得到 实质性的帮助。
 
 绝不要自以为够资格得到答案，你没这种资格。毕竟你没有为这种服务支付任何报酬。你要自己去“挣”回一个答案，靠提出一个有内涵的，有趣的，有思维激励作用的问题--一个对社区的经验有潜在贡献的问题，而不仅仅是被动的从他人处索要知识。
-
-## 其他问题
-
-如果你的问题在此页上没有找到，你可以在我们的社区（见网页页脚）询问。
-
-如果你确信你的问题是由 YiriMirai 导致的，并能明确问题发生的原因，请在 [GitHub Issues](https://github.com/YiriMiraiProject/YiriMirai/issues) 上提出，我们会尽可能地解决这个问题。

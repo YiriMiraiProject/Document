@@ -61,6 +61,7 @@ const data = [
           { name: "TempMessage" },
         ],
       },
+      { name: "NudgeEvent" },
       {
         name: "RequestEvent",
         children: [
