@@ -42,9 +42,9 @@ async def on_friend_message(event: FriendMessage):
         await bot.send(event, '我是 Yiri。你呢？')
 
         @Filter(FriendMessage)
-        async def waiter(event_new: FriendMessage):
+        def waiter(event_new: FriendMessage):
             if event.sender.id == event_new.sender.id:
-                msg = str(event.message_chain)
+                msg = str(event_new.message_chain)
                 if msg.startswith('我是'):
                     return msg[2:].rstrip('。')
 
@@ -67,9 +67,9 @@ async def on_friend_message(event: FriendMessage):
 
 ```python
 @Filter(FriendMessage)
-async def waiter(event_new: FriendMessage):
+def waiter(event_new: FriendMessage):
     if event.sender.id == event_new.sender.id:
-        msg = str(event.message_chain)
+        msg = str(event_new.message_chain)
         if msg.startswith('我是'):
             return msg[2:]
 ```
@@ -82,6 +82,8 @@ async def waiter(event_new: FriendMessage):
 - 如果好友发送的消息格式不正确，或者不是与之前的 FriendMessage 是同一个好友，过滤器隐式地返回 `None`。
 
 当触发器返回的值不为 `None` 时，中断控制器会将流程转回 `inc.wait`。`inc.wait` 会返回过滤器解析后的值。
+
+注意，**过滤器中的函数只能为同步的**。
 
 ```python
 name = await inc.wait(waiter)
@@ -107,9 +109,9 @@ async def on_friend_message(event: FriendMessage):
         await bot.send(event, '我是 Yiri。你呢？')
 
         @Filter(FriendMessage)
-        async def waiter(event_new: FriendMessage):
+        def waiter(event_new: FriendMessage):
             if event.sender.id == event_new.sender.id:
-                msg = str(event.message_chain)
+                msg = str(event_new.message_chain)
                 if msg.startswith('我是'):
                     return msg[2:].rstrip('。')
 
@@ -159,8 +161,8 @@ async def on_friend_message(event: FriendMessage):
         await bot.send(event, '我是 Yiri。你呢？')
 
         @FriendMessageFilter(friend=event.sender)  # 只接受与 event.sender 相同的好友
-        async def waiter(event_new: FriendMessage):
-            msg = str(event.message_chain)
+        def waiter(event_new: FriendMessage):
+            msg = str(event_new.message_chain)
             if msg.startswith('我是'):
                 return msg[2:]
 
@@ -179,8 +181,8 @@ async def on_group_message(event: GroupMessage):
         await bot.send(event, '我是 Yiri。你呢？')
 
         @GroupMessageTrigger(group_member=event.sender)  # 只接受与 event.sender 相同的群成员
-        async def trigger(event_new: GroupMessage):
-            msg = str(event.message_chain)
+        def trigger(event_new: GroupMessage):
+            msg = str(event_new.message_chain)
             if msg.startswith('我是'):
                 return msg[2:].rstrip('。')
 
@@ -201,8 +203,8 @@ async def on_group_message(event: GroupMessage):
         message_id = await bot.send(event, '我是 Yiri。你呢？')
 
         @GroupMessageTrigger(quote=message_id)  # 只接受回复机器人的消息
-        async def trigger(event_new: GroupMessage):
-            msg = str(event.message_chain)
+        def trigger(event_new: GroupMessage):
+            msg = str(event_new.message_chain)
             if msg.startswith('我是'):
                 return msg[2:].rstrip('。')
 
