@@ -69,6 +69,12 @@ pip install hypercorn
 
 检查你的 mirai-api-http 版本。YiriMirai 需要 2.0.0 及以上版本。
 
+### 在 docker 中监听地址问题
+
+报错信息为 `did not receive a valid HTTP response` 或 `Server disconnected without sending a response`。
+
+可能是由于 docker 将 localhost 绑定到 IPv6 地址上的原因，可以将 localhost 改为 127.0.0.1 来解决。
+
 ## 使用相关
 
 ### AttributeError: 'coroutine' object has no attribute XXX

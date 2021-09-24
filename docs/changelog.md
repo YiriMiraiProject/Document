@@ -4,6 +4,27 @@ sidebar_position: 6
 
 # 更新日志
 
+## 0.2.5
+
+发布日期：2021年9月20日
+
+新增功能：
+
+修复 [#26](https://github.com/YiriMiraiProject/YiriMirai/issues/26) 和 [#27](https://github.com/YiriMiraiProject/YiriMirai/issues/27)。
+
+修复 WebSocket 连接断开时，程序卡住不退出的问题。
+
+适配 mirai-api-http 2.3.0：
+1. 新增修改群员管理员权限接口。
+2. 支持好友语音。
+3. 语音追加 `length` 返回语音时间长度，单位为秒。
+4. `BotJoinGroupEvent` `MemberJoinEvent` 两个入群时间追加邀请人 `invitor` 参数。
+5. `BotLeaveEvent` Bot 离群事件，在 Bot 被踢出时可通过 `operator` 获取执行操作的管理员信息。
+6. 群文件相关接口全增加 `path` 参数用于模糊定位（群文件相同目录可重名），优先级高于 `id`，精准定位请使用 `id`。
+7. 丰富群文件信息的 `download_info` 参数的内容，包括修改时间、上传时间、上传者、下载次数。
+
+~~其实上面这一大段是从 mirai-api-http 的更新日志里粘贴过来的~~
+
 ## 0.2.4
 
 发布日期：2021年8月22日

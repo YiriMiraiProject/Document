@@ -70,6 +70,13 @@ const data = [
           { name: "NewFriendRequestEvent" },
         ],
       },
+      {
+        name: "OtherClientEvent",
+        children: [
+          { name: "OtherClientOnlineEvent" },
+          { name: "OtherClientOfflineEvent" },
+        ],
+      },
     ],
   },
 ];

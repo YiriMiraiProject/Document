@@ -18,6 +18,7 @@ const data = [
       { name: "GroupConfig" },
       { name: "GroupList" },
       { name: "Kick" },
+      { name: "MemberAdmin"},
       { name: "MemberInfo" },
       { name: "MemberList" },
       { name: "MemberProfile" },
