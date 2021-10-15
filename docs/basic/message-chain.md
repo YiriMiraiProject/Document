@@ -53,9 +53,9 @@ await bot.send_friend_message(12345678, MessageChain([
 
 ## 消息链的字符串表示
 
-使用`str(message_chain)`获取消息链的字符串表示，字符串采用 mirai 码格式，并自动按照 mirai 码的规定转义。参看 mirai 的[文档](https://github.com/mamoe/mirai/blob/dev/docs/Messages.md#mirai-%E7%A0%81)。
+使用 `str(message_chain)` 获取消息链的字符串表示。字符串表示的格式类似于手机 QQ 在通知栏消息中的格式，例如图片会被转化为 `[图片]`，等等。
 
-获取未转义的消息链字符串，可以使用`deserialize(str(message_chain))`。
+`message_chain.as_mirai_code()` 返回消息的 mirai 码格式，并自动按照 mirai 码的规定转义。参看 mirai 的[文档](https://github.com/mamoe/mirai/blob/dev/docs/Messages.md#mirai-%E7%A0%81)。
 
 ## 在消息链上的操作
 
