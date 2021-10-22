@@ -79,7 +79,7 @@ APScheduler 提供了 `AsyncIOScheduler`，用于在 YiriMirai 这样的异步�
 
 ```python
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from apscheduler.trigger.cron import CronTrigger
+from apscheduler.triggers.cron import CronTrigger
 
 scheduler = AsyncIOScheduler()
 
