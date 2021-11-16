@@ -20,7 +20,8 @@ YiriMirai 是一个轻量级、低耦合的基于 mirai-api-http 的 Python SDK�
 
 基于 mirai-api-http 的 Python 框架还有：
 
- - [Graia Framework](https://github.com/GraiaProject/Application)。这是一个设计精巧，协议实现完备的，基于 mirai-api-http 的即时聊天软件自动化框架。
+ - [Graia Application](https://github.com/GraiaProject/Application)。这是一个设计精巧，协议实现完备的，基于 mirai-api-http 的即时聊天软件自动化框架。
+ - [Ariadne](https://github.com/GraiaProject/Ariadne) Graia Framework 在适配 mirai-api-http 2.x 的基础上采用了某些与 YiriMirai 相似设计思想的框架。
  - [saaya](https://github.com/jerrita/saaya)。这是一个基于 mirai-api-http 的轻量机器人框架。
  - [miraicle](https://github.com/Excaive/miraicle)。这是一个基于 mirai-api-http 的轻量级 Python SDK。
 
