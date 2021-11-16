@@ -55,7 +55,7 @@ async def timer():
     today_finished = False # 设置变量标识今天是会否完成任务，防止重复发送
     while True:
         await asyncio.sleep(1)
-        now = datetime.dtaetime.now()
+        now = datetime.datetime.now()
         if now.hour == 7 and now.minute == 30 and not today_finished: # 每天早上 7:30 发送早安
             await bot.send_group_message(12345678, "早安")
             today_finished = True
