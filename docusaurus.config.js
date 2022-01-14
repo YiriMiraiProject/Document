@@ -41,7 +41,7 @@ module.exports = {
           position: "left",
           type: "doc",
           docId: "intro",
-          docsPluginId: "tutorials"
+          docsPluginId: "tutorials",
         },
         {
           to: "/blog",
@@ -72,7 +72,7 @@ module.exports = {
             },
             {
               label: "教程",
-              to: "/tutorials/intro"
+              to: "/tutorials/intro",
             },
             {
               href: "https://yirimiraiproject.github.io/YiriMirai",
@@ -129,6 +129,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/YiriMiraiProject/YiriMirai/edit/doc/",
+          remarkPlugins: [require("mdx-mermaid")],
         },
         blog: {
           blogTitle: "博客",
@@ -136,13 +137,13 @@ module.exports = {
           blogSidebarCount: 5,
           blogSidebarTitle: "最近的博文",
           showReadingTime: false,
-          editUrl: "https://github.com/YiriMiraiProject/YiriMirai/edit/blog/",
+          editUrl: "https://github.com/YiriMiraiProject/Document/edit/blog/",
         },
         theme: {
           customCss: [require.resolve("./src/css/custom.css")],
         },
         gtag: {
-          trackingID: 'G-L0N9H6KGGW',
+          trackingID: "G-L0N9H6KGGW",
           anonymizeIP: true, // Should IPs be anonymized?
         },
       },
