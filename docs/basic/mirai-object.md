@@ -233,6 +233,10 @@ uvicorn main:runner --host 127.0.0.1 --port 8081
 
 ## SimpleMirai
 
+:::warning
+`SimpleMirai` 已废弃。将在 0.3 版本删除，其中内容将合并到 `Mirai` 中。
+:::
+
 SimpleMirai 是工作在模型层之下的 Mirai。
 
 :::note

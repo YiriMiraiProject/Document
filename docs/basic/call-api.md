@@ -82,6 +82,10 @@ await bot.api('send_group_message')(12345678, [Plain('Hello, World!')])
 
 ### `call_api` 方法
 
+:::warning
+此方法已废弃，将在 0.3 版本删除。
+:::
+
 与 `api` 不同，`call_api` 定义在 `SimpleMirai` 中。这意味着它没有 model 层封装，也就是说，必须使用 mirai-api-http 中定义的原始名称，并指定使用的方法（GET/POST），而且参数只能通过具名参数传入，具有复杂数据格式的参数只能使用字典表示。
 
 ```python
