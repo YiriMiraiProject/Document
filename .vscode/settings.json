@@ -8,4 +8,15 @@
     "css.lint.unknownAtRules": "ignore",
     "python.formatting.provider": "yapf",
     "python.linting.mypyEnabled": true,
+    "cSpell.enableFiletypes": [
+        "mdx"
+    ],
+    "cSpell.words": [
+        "asyncio",
+        "functools",
+        "Graia",
+        "Mirai",
+        "startswith",
+        "Yiri"
+    ],
 }
