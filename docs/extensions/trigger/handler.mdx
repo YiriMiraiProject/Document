@@ -34,7 +34,7 @@ hdc = HandlerControl(bot)
 
 ```python
 @Filter(FriendMessage)
-async def filter_(event: FriendMessage):
+def filter_(event: FriendMessage):
     msg = str(event.message_chain)
     if msg.startswith('/'):
         return msg[1:]
@@ -65,7 +65,7 @@ bot = Mirai(...)
 hdc = HandlerControl(bot)
 
 @Filter(FriendMessage)
-async def filter_(event: FriendMessage):
+def filter_(event: FriendMessage):
     msg = str(event.message_chain)
     if msg.startswith('/'):
         return msg[1:]
