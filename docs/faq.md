@@ -4,6 +4,12 @@ sidebar_position: 5
 
 # 常见问题
 
+## 账号相关
+
+### 发不出群消息
+
+第一次使用 mirai 时，可能会出现能发送好友消息但不能发送群消息的情况。这是由于腾讯的风控政策限制，属于**正常现象**。一般情况下，用 mirai 登陆账号，挂机几小时至几天即可解决。
+
 ## 版本相关
 
 ### ModuleNotFoundError: No module named 'mirai'
@@ -80,6 +86,14 @@ pip install hypercorn
 ### AttributeError: 'coroutine' object has no attribute XXX
 
 你忘了 `await`。**所有**的 API 调用都需要 `await`，就像这样： `await bot.xxx()`。
+
+### As of 3.10, the \*loop\* parameter was removed from Lock() since it is no longer necessary
+
+这个错误是 websockets 库引起的（不是 YiriMirai），并且在新版本的 websockets 中已经修复。升级 websockets 可以解决这个问题：
+
+```
+pip install websocket>=10.0 -U
+```
 
 ## 其他问题
 

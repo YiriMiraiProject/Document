@@ -25,7 +25,7 @@ async def start_scheduler(_):
         today_finished = False # 设置变量标识今天是会否完成任务，防止重复发送
         while True:
             await asyncio.sleep(1)
-            now = datetime.dtaetime.now()
+            now = datetime.datetime.now()
             if now.hour == 7 and now.minute == 30 and not today_finished: # 每天早上 7:30 发送早安
                 await bot.send_group_message(12345678, "早安")
                 today_finished = True
@@ -41,6 +41,10 @@ async def stop_scheduler(_):
     if _task and not task.done():
         _task.cancel()
 ```
+
+:::info
+如你所见，这个方式十分繁琐。我不推荐在生产环境中使用这样的代码。至于最好的方式，请看后文的“使用 `APScheduler` 实现定时任务”。
+:::
 
 上面的操作中，我们在 bot 启动时创建了一个 Task，在 Task 中，我们不断检测时间，到达某个时间点就执行操作。最后，退出时停止定时任务。
 
@@ -62,6 +66,10 @@ async def timer():
         if now.hour == 7 and now.minute == 31:
             today_finished = False # 早上 7:31，重置今天是否完成任务的标识
 ```
+
+:::info
+同样地，这里仅为介绍 `bot.add_background_task` 的作用而写。对于定时任务这一专门的操作，请参考后文的实现方式。
+:::
 
 当然，这种方式实现的定时任务是十分简陋的。下面，我们将介绍使用 `APScheduler` 库，实现拓展性更强的定时任务。
 

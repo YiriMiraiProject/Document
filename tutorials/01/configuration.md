@@ -136,15 +136,31 @@ Mirai Console Loader 公告栏
 
 之后，在这个文件夹里打开命令行，输入 `./mcl` 就可以启动 mirai-console。
 
-## 2. 安装配置 mirai-api-http
+## 2. 安装 mirai-api-http
 
-YiriMirai 依赖于 mirai-api-http V2，而 mirai-api-http 并不能通过 mirai-console-loader 自动安装（[原因](https://github.com/project-mirai/mirai-api-http/issues/381)），需要手动下载安装。
+目前，mirai-api-http 可以通过 mirai-console-loader 安装或手动安装，**两种方式择一即可**。
+### 使用 mirai-console-loader 安装
+
+在 mirai-console-loader 的文件夹中，运行
+
+```shell
+./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin
+```
+
+然后，在下一次启动 mirai-console 的时候，会自动下载并安装 mirai-api-http。
+
+注意，上述命令中的 `--channel stable-v2` 是必须的，因为 YiriMirai 依赖于 mirai-api-http v2，而缺失此参数时，默认安装的是 v1，会导致无法正常使用。
+### 手动安装
+
+YiriMirai 依赖于 mirai-api-http V2，而 mirai-api-http V2 曾经在很长一段时间内并不能通过 mirai-console-loader 自动安装（[原因](https://github.com/project-mirai/mirai-api-http/issues/381)），需要手动下载安装。
 
 在 mirai-api-http 的 [releases 页面](https://github.com/project-mirai/mirai-api-http) 下载最新的 release 版本。目前，YiriMirai 支持的版本为 mirai-api-http V2.2.0。
 
 将下载的 jar 文件放入 mirai-console 目录下的 `plugins` 文件夹中，然后重启 mirai-console。
 
-可以看到控制台输出多了下面几行：
+## 3. 配置 mirai-api-http
+
+启动 mirai-console，可以看到控制台输出多了下面几行：
 
 ```
 2021-08-03 22:02:08 W/net.mamoe.mirai-api-http: USING INITIAL KEY, please edit the key
@@ -188,7 +204,7 @@ adapterSettings:
 
 恭喜你，mirai-api-http 安装成功了。
 
-## 3. 登录 QQ
+## 4. 登录 QQ
 
 运行 mirai-console，在控制台输入 `login QQ号 密码`，登录 QQ。
 
