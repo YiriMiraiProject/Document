@@ -114,6 +114,19 @@ module.exports = {
             },
           ],
         },
+        {
+          title: "友情链接",
+          items: [
+            {
+              label: "Graiax 社区",
+              href: "https://graiax.cn/",
+            },
+            {
+              label: "冰月API",
+              href: "https://apii.bingyue.xyz/",
+            },
+          ],
+        },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} YiriMiraiProject，由 Docusaurus 2 构建。`,
     },
