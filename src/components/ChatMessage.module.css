@@ -11,6 +11,10 @@
     background-color: #f5f5f5;
 }
 
+html[data-theme='dark'] .panelView {
+    background-color: #3c3c3c;
+}
+
 .controls {
     display: initial;
     position: absolute;
@@ -110,6 +114,11 @@
     word-break: break-all;
 }
 
+html[data-theme='dark'] .messageBox {
+    background-color: #e5e5e5;
+    color: black;
+}
+
 .messageBox:before {
     content: "";
     position: absolute;
@@ -121,4 +130,8 @@
     border-bottom: 8px solid;
     border-radius: 0 0 0 32px;
     color: #fff;
+}
+
+html[data-theme='dark'] .messageBox:before {
+    color: #e5e5e5;
 }
