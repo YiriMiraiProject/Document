@@ -5,7 +5,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 module.exports = {
   title: "YiriMirai",
   tagline: "一个轻量级、低耦合的基于 mirai-api-http 的 Python SDK。",
-  url: "https://yiri-mirai.vercel.app",
+  url: "https://yiri-mirai.wybxc.cc",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
