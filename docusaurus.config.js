@@ -54,6 +54,11 @@ module.exports = {
           position: "left",
         },
         {
+          href: "http://yirimirai.bingyue.xyz",
+          label: "API 文档（镜像）",
+          position: "left",
+        },
+        {
           href: "https://github.com/YiriMiraiProject/YiriMirai",
           label: "GitHub",
           position: "right",
