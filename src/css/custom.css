@@ -7,26 +7,36 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #10846d;
+  --ifm-color-primary-dark: #0e7762;
+  --ifm-color-primary-darker: #0e705d;
+  --ifm-color-primary-darkest: #0b5c4c;
+  --ifm-color-primary-light: #129178;
+  --ifm-color-primary-lighter: #12987d;
+  --ifm-color-primary-lightest: #15ac8e;
 
   --ifm-code-font-size: 95%;
+
+  --var-highlight-code-line-background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #13957b;
+  --ifm-color-primary-dark: #11866f;
+  --ifm-color-primary-darker: #107f69;
+  --ifm-color-primary-darkest: #0d6856;
+  --ifm-color-primary-light: #15a487;
+  --ifm-color-primary-lighter: #16ab8d;
+  --ifm-color-primary-lightest: #19c2a0;
+
+  --var-highlight-code-line-background: rgba(0, 0, 0, 0.3);
 }
 
 .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--var-highlight-code-line-background);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
-}
-
-html[data-theme="dark"] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .blog-list-page .markdown:after {

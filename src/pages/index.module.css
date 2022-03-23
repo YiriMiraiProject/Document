@@ -6,10 +6,19 @@
  */
 
 .heroBanner {
+  --ifm-hero-background-color: var(--var-hero-background-color);
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+:root {
+  --var-hero-background-color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] {
+  --var-hero-background-color: var(--ifm-color-primary);
 }
 
 @media screen and (max-width: 966px) {

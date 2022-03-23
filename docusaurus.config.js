@@ -1,134 +1,129 @@
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: "YiriMirai",
-  tagline: "一个轻量级、低耦合的基于 mirai-api-http 的 Python SDK。",
-  url: "https://yiri-mirai.wybxc.cc",
-  baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
-  organizationName: "YiriMiraiProject",
-  projectName: "YiriMirai",
+  title: 'YiriMirai',
+  tagline: '一个轻量级、低耦合的基于 mirai-api-http 的 Python SDK。',
+  url: 'https://yiri-mirai.wybxc.cc',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  favicon: 'img/favicon.ico',
+  organizationName: 'YiriMiraiProject',
+  projectName: 'YiriMirai',
   i18n: {
-    defaultLocale: "zh-CN",
-    locales: ["zh-CN"],
+    defaultLocale: 'zh-CN',
+    locales: ['zh-CN'],
     localeConfigs: {
-      "zh-CN": {
-        label: "简体中文",
-        direction: "ltr",
+      'zh-CN': {
+        label: '简体中文',
+        direction: 'ltr',
       },
     },
   },
   themeConfig: {
     navbar: {
-      title: "YiriMirai",
+      title: 'YiriMirai',
       logo: {
-        alt: "Logo",
-        src: "img/logo.svg",
+        alt: 'Logo',
+        src: 'img/logo.svg',
       },
       items: [
         {
-          label: "文档",
-          position: "left",
-          type: "doc",
-          docId: "intro",
+          label: '文档',
+          position: 'left',
+          type: 'doc',
+          docId: 'intro',
         },
         {
-          label: "教程",
-          position: "left",
-          type: "doc",
-          docId: "intro",
-          docsPluginId: "tutorials",
+          label: '教程',
+          position: 'left',
+          type: 'doc',
+          docId: 'intro',
+          docsPluginId: 'tutorials',
         },
         {
-          to: "/blog",
-          label: "博客",
-          position: "left",
+          to: '/blog',
+          label: '博客',
+          position: 'left',
         },
         {
-          href: "https://yirimiraiproject.github.io/YiriMirai",
-          label: "API 文档",
-          position: "left",
+          href: 'https://yirimiraiproject.github.io/YiriMirai',
+          label: 'API 文档',
+          position: 'left',
         },
         {
-          href: "http://yirimirai.bingyue.xyz",
-          label: "API 文档（镜像）",
-          position: "left",
-        },
-        {
-          href: "https://github.com/YiriMiraiProject/YiriMirai",
-          label: "GitHub",
-          position: "right",
+          href: 'https://github.com/YiriMiraiProject/YiriMirai',
+          label: 'GitHub',
+          position: 'right',
         },
       ],
     },
     footer: {
-      style: "dark",
+      style: 'dark',
       links: [
         {
-          title: "文档",
+          title: '文档',
           items: [
             {
-              label: "文档",
-              to: "/docs/intro",
+              label: '文档',
+              to: '/docs/intro',
             },
             {
-              label: "教程",
-              to: "/tutorials/intro",
+              label: '教程',
+              to: '/tutorials/intro',
             },
             {
-              href: "https://yirimiraiproject.github.io/YiriMirai",
-              label: "API 文档",
+              href: 'https://yirimiraiproject.github.io/YiriMirai',
+              label: 'API 文档',
             },
           ],
         },
         {
-          title: "社区",
+          title: '社区',
           items: [
             {
-              label: "QQ 群：766952599",
-              href: "https://jq.qq.com/?_wv=1027&k=PXBOuBCI",
+              label: 'QQ 群：766952599',
+              href: 'https://jq.qq.com/?_wv=1027&k=PXBOuBCI',
             },
             {
-              label: "Github Discussion",
-              href: "https://github.com/YiriMiraiProject/YiriMirai/discussions",
+              label: 'Github Discussion',
+              href: 'https://github.com/YiriMiraiProject/YiriMirai/discussions',
             },
             {
-              label: "Discord",
-              href: "https://discord.gg/RaXsHFC3PH",
+              label: 'Discord',
+              href: 'https://discord.gg/RaXsHFC3PH',
             },
           ],
         },
         {
-          title: "更多",
+          title: '更多',
           items: [
             {
-              label: "博客",
-              to: "/blog",
+              label: '博客',
+              to: '/blog',
             },
             {
-              label: "国内地址",
-              href: "https://yiri-mirai.wybxc.cc",
+              label: '国内地址',
+              href: 'https://yiri-mirai.wybxc.cc',
             },
             {
-              label: "GitHub",
-              href: "https://github.com/YiriMiraiProject/YiriMirai",
+              label: 'GitHub',
+              href: 'https://github.com/YiriMiraiProject/YiriMirai',
             },
           ],
         },
         {
-          title: "友情链接",
+          title: '友情链接',
           items: [
             {
-              label: "Graiax 社区",
-              href: "https://graiax.cn/",
+              label: 'Graiax 社区',
+              href: 'https://graiax.cn/',
             },
             {
-              label: "冰月API",
-              href: "https://apii.bingyue.xyz/",
+              label: '冰月API',
+              href: 'http://by1106.bingyue.xyz',
             },
           ],
         },
@@ -139,29 +134,43 @@ module.exports = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
     },
+    algolia: {
+      appId: 'YOUR_APP_ID',
+      // Public API key: it is safe to commit it
+      apiKey: 'YOUR_SEARCH_API_KEY',
+      indexName: 'YOUR_INDEX_NAME',
+      // Optional: see doc section below
+      contextualSearch: true,
+      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      // externalUrlRegex: 'external\\.com|domain\\.com',
+      // Optional: Algolia search parameters
+      searchParameters: {},
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+    },
   },
   presets: [
     [
-      "@docusaurus/preset-classic",
+      '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/YiriMiraiProject/YiriMirai/edit/doc/",
-          remarkPlugins: [require("mdx-mermaid")],
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/YiriMiraiProject/YiriMirai/edit/doc/',
+          remarkPlugins: [require('mdx-mermaid')],
         },
         blog: {
-          blogTitle: "博客",
-          blogDescription: "YiriMirai 的开发笔记，以及其他。",
+          blogTitle: '博客',
+          blogDescription: 'YiriMirai 的开发笔记，以及其他。',
           blogSidebarCount: 5,
-          blogSidebarTitle: "最近的博文",
+          blogSidebarTitle: '最近的博文',
           showReadingTime: false,
-          editUrl: "https://github.com/YiriMiraiProject/Document/edit/blog/",
+          editUrl: 'https://github.com/YiriMiraiProject/Document/edit/blog/',
         },
         theme: {
-          customCss: [require.resolve("./src/css/custom.css")],
+          customCss: [require.resolve('./src/css/custom.css')],
         },
         gtag: {
-          trackingID: "G-L0N9H6KGGW",
+          trackingID: 'G-L0N9H6KGGW',
           anonymizeIP: true, // Should IPs be anonymized?
         },
       },
@@ -169,30 +178,12 @@ module.exports = {
   ],
   plugins: [
     [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
+      '@docusaurus/plugin-content-docs',
       {
-        // `hashed` is recommended as long-term-cache of index file is possible.
-        hashed: true,
-        language: ["en", "zh"],
-        translations: {
-          search_placeholder: "搜索",
-          see_all_results: "查看所有结果……",
-          no_results: "无结果。",
-          search_results_for: "“{{ keyword }}”的搜索结果",
-          search_the_documentation: "搜索文档",
-          count_documents_found: "找到{{ count }}篇文档。",
-          no_documents_were_found: "没有找到包含指定关键词的文档。",
-        },
-        highlightSearchTermsOnTargetPage: true,
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "tutorials",
-        path: "tutorials",
-        routeBasePath: "tutorials",
-        editUrl: "https://github.com/YiriMiraiProject/YiriMirai/edit/doc/",
+        id: 'tutorials',
+        path: 'tutorials',
+        routeBasePath: 'tutorials',
+        editUrl: 'https://github.com/YiriMiraiProject/YiriMirai/edit/doc/',
       },
     ],
   ],
