@@ -118,6 +118,10 @@ module.exports = {
           title: '友情链接',
           items: [
             {
+              label: '忘忧北萱草月刊',
+              href: 'https://monthly.wybxc.cc',
+            },
+            {
               label: 'Graiax 社区',
               href: 'https://graiax.cn/',
             },
@@ -151,7 +155,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/YiriMiraiProject/YiriMirai/edit/doc/',
+          editUrl: 'https://github.com/YiriMiraiProject/Document/edit/',
           remarkPlugins: [require('mdx-mermaid')],
         },
         blog: {
@@ -160,7 +164,7 @@ module.exports = {
           blogSidebarCount: 5,
           blogSidebarTitle: '最近的博文',
           showReadingTime: false,
-          editUrl: 'https://github.com/YiriMiraiProject/Document/edit/blog/',
+          editUrl: 'https://github.com/YiriMiraiProject/Document/edit/',
         },
         theme: {
           customCss: [require.resolve('./src/css/custom.css')],
@@ -179,7 +183,7 @@ module.exports = {
         id: 'tutorials',
         path: 'tutorials',
         routeBasePath: 'tutorials',
-        editUrl: 'https://github.com/YiriMiraiProject/YiriMirai/edit/doc/',
+        editUrl: 'https://github.com/YiriMiraiProject/Document/edit/',
       },
     ],
   ],

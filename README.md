@@ -2,7 +2,7 @@
 
 文档采用 [Docusaurus 2](https://docusaurus.io/) 构建。
 
-文档地址：https://yiri-mirai.vercel.app
+文档地址：https://yiri-mirai.wybxc.cc
 
 使用了来自于 [Bootstrap Icons](https://github.com/twbs/icons) 和 [Ant Design Icons](https://github.com/ant-design/ant-design-icons) 的部分素材。
 
