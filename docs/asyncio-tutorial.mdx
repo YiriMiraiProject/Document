@@ -247,4 +247,26 @@ def job1(url):
 
 按照最简单的方式来理解，**协程就是可以暂停的函数**。
 
+如果把上面的代码用协程的方式写，应该是这样的：
+
+```python
+async def job1(url):
+    response = await get_async(url)
+    print(response.text.count('e'))
+```
+
+和最开始的阻塞式的代码对比一下：
+
+```python
+def job1(url):
+    response = requests.get(url)
+    print(response.text.count('e'))
+```
+
+看起来真不错。只需要多加上 `async` 和 `await` 两个单词，就能把阻塞变成非阻塞！这可比思考什么线程加锁或者什么时候用回调这种事情简单多了。
+
+好了，先从涨姿势的喜悦中暂时抽离出来，进入冷静思考的模式：**`async` 和 `await` 到底在背后做了什么？**
+
+
+
 🚧施工中🚧
