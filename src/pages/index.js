@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
+import HomepageFeatures from '../components/HomepageFeatures';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
+import clsx from 'clsx';
 import styles from './index.module.css';
-import HomepageFeatures from '../components/HomepageFeatures';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -15,9 +15,14 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className={clsx("button button--secondary button--lg", styles.button)}
             to="/docs/intro">
-             入门指南 
+             阅读文档
+          </Link>
+          <Link
+            className={clsx("button button--secondary button--lg", styles.button)}
+            to="/tutorials/intro">
+             入门教程
           </Link>
         </div>
       </div>
