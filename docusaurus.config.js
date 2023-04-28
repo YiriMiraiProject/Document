@@ -49,6 +49,12 @@ module.exports = {
           position: 'left',
         },
         {
+          label: '开发者文档',
+          position: 'left',
+          type: 'doc',
+          docId: 'developer/intro',
+        },
+        {
           href: 'https://yirimiraiproject.github.io/YiriMirai',
           label: 'API 文档',
           position: 'left',
